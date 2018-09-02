@@ -47,12 +47,12 @@ public class NoobChain {
 		walletB = new Wallet();
 
 		System.out.println("Private and public keys: ");
-		System.out.println(HashUtil.getStringFromKey(walletA.privateKey));
-		System.out.println(HashUtil.getStringFromKey(walletA.publicKey));
+		System.out.println(HashUtil.getStringFromKey(walletA.getPrivateKey()));
+		System.out.println(HashUtil.getStringFromKey(walletA.getPublicKey()));
 
 		// first transaction from A to B
-		Transaction transaction = new Transaction(walletA.publicKey, walletB.publicKey, 5, null);
-		transaction.generateSignature(walletA.privateKey);
+		Transaction transaction = new Transaction(walletA.getPublicKey(), walletB.getPublicKey(), 5, null);
+		transaction.generateSignature(walletA.getPrivateKey());
 
 		// verify signature
 		System.out.println("Is signature verified");
@@ -69,17 +69,17 @@ public class NoobChain {
 			currentBlock = blockchain.get(i);
 			previousBlock = blockchain.get(i - 1);
 			// compare registered hash and calculated hash:
-			if (!currentBlock.hash.equals(currentBlock.calculateHash())) {
+			if (!currentBlock.getHash().equals(currentBlock.calculateHash())) {
 				System.out.println("Current Hashes not equal");
 				return false;
 			}
 			// compare previous hash and registered previous hash
-			if (!previousBlock.hash.equals(currentBlock.previousHash)) {
+			if (!previousBlock.getHash().equals(currentBlock.getPreviousHash())) {
 				System.out.println("Previous Hashes not equal");
 				return false;
 			}
 			// check if hash is solved
-			if (!currentBlock.hash.substring(0, difficulty).equals(hashTarget)) {
+			if (!currentBlock.getHash().substring(0, difficulty).equals(hashTarget)) {
 				System.out.println("This block hasn't been mined");
 				return false;
 			}

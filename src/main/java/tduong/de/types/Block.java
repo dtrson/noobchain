@@ -2,12 +2,14 @@ package tduong.de.types;
 
 import java.util.Date;
 
+import lombok.Getter;
 import tduong.de.utils.HashUtil;
 
+@Getter
 public class Block {
 
-	public String hash;
-	public String previousHash;
+	private String hash;
+	private String previousHash;
 	private String data; // our data will be a simple message.
 	private long timeStamp; // as number of milliseconds since 1/1/1970.
 	private int nonce;

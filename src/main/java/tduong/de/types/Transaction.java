@@ -5,17 +5,19 @@ import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Getter;
 import tduong.de.utils.HashUtil;
 
+@Getter
 public class Transaction {
 
-	public String transactionId;
-	public PublicKey sender;
-	public PublicKey reciepient;
-	public float value;
-	public byte[] signature;
-	public List<TransactionInput> inputs = new ArrayList<TransactionInput>();
-	public List<TransactionOutput> outputs = new ArrayList<TransactionOutput>();
+	private String transactionId;
+	private PublicKey sender;
+	private PublicKey reciepient;
+	private float value;
+	private byte[] signature;
+	private List<TransactionInput> inputs = new ArrayList<TransactionInput>();
+	private List<TransactionOutput> outputs = new ArrayList<TransactionOutput>();
 	private static int sequence = 0;
 
 	public Transaction(PublicKey from, PublicKey to, float value, List<TransactionInput> inputs) {

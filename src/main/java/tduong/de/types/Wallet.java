@@ -7,9 +7,12 @@ import java.security.PublicKey;
 import java.security.SecureRandom;
 import java.security.spec.ECGenParameterSpec;
 
+import lombok.Getter;
+
+@Getter
 public class Wallet {
-	public PrivateKey privateKey;
-	public PublicKey publicKey;
+	private PrivateKey privateKey;
+	private PublicKey publicKey;
 
 	public Wallet() {
 		generateKeyPair();
