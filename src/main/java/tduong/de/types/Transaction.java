@@ -1,5 +1,6 @@
 package tduong.de.types;
 
+import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,18 @@ public class Transaction {
 		this.reciepient = to;
 		this.value = value;
 		this.inputs = inputs;
+	}
+
+	// Signs all the data we dont wish to be tampered with.
+	public void generateSignature(PrivateKey privateKey) {
+		String data = HashUtil.getStringFromKey(sender) + HashUtil.getStringFromKey(reciepient) + Float.toString(value);
+		signature = HashUtil.applyECDSASig(privateKey, data);
+	}
+
+	// Verifies the data we signed hasnt been tampered with
+	public boolean verifiySignature() {
+		String data = HashUtil.getStringFromKey(sender) + HashUtil.getStringFromKey(reciepient) + Float.toString(value);
+		return HashUtil.verifyECDSASig(sender, data, signature);
 	}
 
 	private String calulateHash() {
